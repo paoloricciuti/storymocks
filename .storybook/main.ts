@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/sveltekit';
-import { mergeConfig } from 'vite';
+import { loadEnv, mergeConfig } from 'vite';
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
 
@@ -10,7 +10,7 @@ const plugin: Plugin = {
 		mergeConfig(config, {
 			resolve: {
 				alias: {
-					$app: resolve(process.cwd(), './.storybook/mocks/')
+					$app: resolve(process.cwd(), './.storybook/mocks/app/')
 				}
 			}
 		})

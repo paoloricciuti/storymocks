@@ -1,6 +1,12 @@
 <script lang="ts">
 	import './button.css';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		console.log('in');
+	});
 
 	/**
 	 * Is this the principal call to action on the page?
@@ -18,7 +24,7 @@
 	/**
 	 * Button contents
 	 */
-	export let label: string = '';
+	export let label = '';
 
 	$: mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
 
@@ -26,11 +32,14 @@
 </script>
 
 <pre>{JSON.stringify($page?.data, null, 2)}</pre>
+<a href="/somewhere"><span>Go some</span></a>
 <button
 	type="button"
 	class={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
 	{style}
-	on:click
+	on:click={() => {
+		goto('something');
+	}}
 >
 	{label}
 </button>
