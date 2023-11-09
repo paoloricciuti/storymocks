@@ -1,5 +1,20 @@
-import { writable } from 'svelte/store';
+import { getContext, setContext } from 'svelte';
 
-export const page = writable<any>();
-export const navigating = writable<any>();
-export const updated = writable<any>();
+function createMockedStore(contextName: string) {
+	return [
+		{
+			subscribe(runner) {
+				const page = getContext(contextName);
+				runner(page);
+				return () => {};
+			}
+		},
+		(value: unknown) => {
+			setContext(contextName, value);
+		}
+	] as const;
+}
+
+export const [page, setPage] = createMockedStore('page-ctx');
+export const [navigating, setNavigating] = createMockedStore('navigating-ctx');
+export const [updated, setUpdated] = createMockedStore('updated-ctx');
