@@ -26,16 +26,23 @@ export const Primary: Story = {
 		label: 'Button'
 	},
 	parameters: {
-		kitStores: {
-			page: {
-				data: {
-					test: 'cooler'
+		sveltekit: {
+			stores: {
+				page: {
+					data: {
+						test: 'cooler'
+					}
 				}
-			}
-		},
-		svelteKitLinkOverrides: {
-			'/somewhere': () => {
-				console.log('Link to somewhere');
+			},
+			navigation: {
+				afterNavigate: {
+					after: 'navigate'
+				}
+			},
+			linkOverrides: {
+				'/somewhere': () => {
+					console.log('Link to somewhere');
+				}
 			}
 		}
 	}
@@ -46,10 +53,17 @@ export const Secondary: Story = {
 		label: 'Button'
 	},
 	parameters: {
-		kitStores: {
-			page: {
-				data: {
-					test: 'secondary'
+		sveltekit: {
+			stores: {
+				page: {
+					data: {
+						test: 'secondary'
+					}
+				}
+			},
+			navigation: {
+				afterNavigate: {
+					after: 'navigate 2'
 				}
 			}
 		}

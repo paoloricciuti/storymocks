@@ -1,3 +1,5 @@
+import { getContext, onMount, setContext } from 'svelte';
+
 export async function goto(...args: any[]) {
 	try {
 		const { action } = await import('@storybook/addon-actions');
@@ -7,7 +9,16 @@ export async function goto(...args: any[]) {
 	}
 }
 
-export function afterNavigate() {}
+export function setAfterNavigateArgument(afterNavigate) {
+	setContext('after-navigate-args', afterNavigate);
+}
+
+export function afterNavigate(cb) {
+	const argument = getContext('after-navigate-args');
+	onMount(() => {
+		cb(argument);
+	});
+}
 
 export function onNavigate() {}
 

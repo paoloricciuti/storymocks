@@ -12,8 +12,8 @@
 			if (has_link && has_link instanceof HTMLAnchorElement) {
 				const to = has_link.getAttribute('href');
 				let override_called = false;
-				if (ctx.parameters.svelteKitLinkOverrides && to) {
-					for (const [link, override] of Object.entries(ctx.parameters.svelteKitLinkOverrides)) {
+				if (ctx?.parameters?.sveltekit?.linkOverrides && to) {
+					for (const [link, override] of Object.entries(ctx.parameters.sveltekit.linkOverrides)) {
 						if (override instanceof Function) {
 							const regex = new RegExp(link);
 							if (regex.test(to)) {

@@ -1,11 +1,15 @@
 <script lang="ts">
 	import './button.css';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
 		console.log('in');
+	});
+
+	afterNavigate((args) => {
+		console.log('afternavigate', args);
 	});
 
 	/**

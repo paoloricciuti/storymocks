@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/svelte';
 import { setDeserializeResponse } from './mocks/app/forms';
 import { setNavigating, setPage, setUpdated } from './mocks/app/stores';
 import LinkListener from './mocks/components/LinkListener.svelte';
+import { setAfterNavigateArgument } from './mocks/app/navigation';
 
 const preview: Preview = {
 	parameters: {
@@ -15,10 +16,11 @@ const preview: Preview = {
 	},
 	decorators: [
 		(Story, ctx) => {
-			setPage(ctx.parameters?.kitStores?.page);
-			setUpdated(ctx.parameters?.kitStores?.updated);
-			setNavigating(ctx.parameters?.kitStores?.navigating);
-			setDeserializeResponse(ctx.parameters?.kitForms?.deserializeResponse);
+			setPage(ctx.parameters?.sveltekit?.stores?.page);
+			setUpdated(ctx.parameters?.sveltekit?.stores?.updated);
+			setNavigating(ctx.parameters?.sveltekit?.stores?.navigating);
+			setDeserializeResponse(ctx.parameters?.sveltekit?.forms?.deserializeResponse);
+			setAfterNavigateArgument(ctx.parameters?.sveltekit?.navigation?.afterNavigate);
 			return Story();
 		},
 		(_, ctx) => ({ Component: LinkListener, props: { ctx } })
